@@ -13,4 +13,8 @@ benchmark
 benchmarkOnly com.you.MyBenchmark
 ```
 
+## props
+
+This plugin continues on the path that [this plugin](https://github.com/alno/sbt-caliper) started.
+
 Doug Tangren (softprops) 2013
