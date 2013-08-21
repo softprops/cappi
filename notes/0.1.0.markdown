@@ -21,9 +21,9 @@ Then mix `cappiSettings` into your build defintion
 To run your benchmarks from the sbt REPL, just enter
 
     > cappi::benchmark
-    
+
 To run a single benchmark, just enter
 
     > cappi::benchmarkOnly com.beep.BoopBenchmark
-    
+
 For more information, see the projects [readme](https://github.com/softprops/cappi#readme)
