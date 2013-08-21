@@ -69,7 +69,7 @@ To run benchmarks, you need to first write benchmarks. To write benchmarks you n
 To remove the need for you doing this yourself, Cappi will add caliper to your _test_ classpath. This make getting started
 a much smoother process.
 
-To override the calpier version in use, 0.5-rc1, override the `caliperVersion` setting.
+To override the calpier version in use, "0.5-rc1" by default, override the `caliperVersion` setting.
 
 ```scala
 caliperVersion in cappi := Some("custom-version")

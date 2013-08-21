@@ -1,2 +1,3 @@
 cli options https://code.google.com/p/caliper/wiki/CommandLineOptions
 uploading results http://microbenchmarks.appspot.com/
+@com.google.caliper.Benchmark class Benchmark is abstract; cannot be instantiated -> https://issues.scala-lang.org/browse/SI-7603
