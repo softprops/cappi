@@ -6,7 +6,7 @@ Cappi runs [Caliper](https://code.google.com/p/caliper/) benchmarks
 
 ## Install
 
-To install Cappi add the following to your projets plugin configuration, typically in `project/plugins.sbt`
+To install Cappi add the following to your project's plugin configuration, typically in a `project/plugins.sbt` file.
 
 ( todo )
 
@@ -23,7 +23,7 @@ Cappi will run your benchmarks, but it needs to know _what_ they are first. By d
 ### Resolving Benchmarks
 
 In order to run `benchmarks` Cappi makes the assumption that you've named your benchmark in a source file with a name ending with "Benchmark.scala".
-Cappi will look for this under your `src/main/test` directory. It makes the assumption that you are packaging your benchmarks in folders that mirror
+Cappi will look for this under your `src/test/scala` directory. It makes the assumption that you are packaging your benchmarks in folders that mirror
 the scala package they are under.
 
 For example, the class `foo.BarBenchmark`
@@ -37,13 +37,13 @@ class BarBenchmark extends com.google.caliper.SimpleBenchmark {
 
 would be expected to be located in a file named `src/test/scala/foo/BarBenchmark.scala`
 
-You can see the full list of resolved benchmarks by running the following the the sbt REPL
+You can see the full list of resolved benchmark class names by running the following the the sbt REPL
 
 ```scala
 show cappi::benchmarks
 ```
 
-Alternatively you can override the `benchmarks` setting in your build definition.
+Alternatively, you can override the `benchmarks` setting in your build definition
 
 ```scala
 (cappi.Keys.benchmarks in cappi.Keys.cappi) := Seq("foo.BazBenchmark")
@@ -69,7 +69,7 @@ To run benchmarks, you need to first write benchmarks. To write benchmarks you n
 To remove the need for you doing this yourself, Cappi will add caliper to your _test_ classpath. This make getting started
 a much smoother process.
 
-To override the calpier version in use, 0.5-rc1, override the `caliperVersion in cappi` task
+To override the calpier version in use, 0.5-rc1, override the `caliperVersion` setting.
 
 ```scala
 caliperVersion in cappi := Some("custom-version")
