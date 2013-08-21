@@ -19,10 +19,10 @@ resolvers += Resolver.url(
 addSbtPlugin("me.lessis" % "cappi" % "0.1.0")
 ```
 
-Then mix `cappiSettings` into your build defintion, typically in a `build.sbt` file.
+Then mix `cappiTasks` into your build defintion, typically in a `build.sbt` file.
 
 ```scala
-seq(cappiSettings:_*)
+seq(cappiTasks:_*)
 ```
 
 ## Usage

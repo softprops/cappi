@@ -10,7 +10,7 @@ import sbt.Defaults._
 object Plugin extends sbt.Plugin {
   import cappi.Keys._
 
-  def cappiTasks = Seq(
+  def cappiSettings = Seq(
     caliperVersion in cappi := Some("0.5-rc1"),
     benchmarks in cappi := {
      val base = (scalaSource in Test).value

@@ -12,9 +12,9 @@ Simply add the following to your sbt plugin definition.
                                 
     addSbtPlugin("me.lessis" % "cappi" % "0.1.0")
 
-Then mix `cappiSettings` into your build defintion
+Then mix `cappiTasks` into your build defintion
 
-    seq(cappiSettings:_*)
+    seq(cappiTasks:_*)
 
 ### Running
 

@@ -2,7 +2,7 @@ organization := "me.lessis"
 
 name := "cappi"
 
-version := "0.1.0"
+version := "0.1.1-SNAPSHOT"
 
 description := "a sweetest benchmarking plugin you will ever meet"
 
