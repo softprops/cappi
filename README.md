@@ -20,22 +20,21 @@ For example the class `foo.BarBenchmark`
 ```scala
 package foo
 class BarBenchmark extends com.google.caliper.SimpleBenchmark {
-...
+ // ...
 }
 ```
 
-would be located in a file named `src/test/scala/foo/Bar.scala`
-
+would be expected to be located in a file named `src/test/scala/foo/Bar.scala`
 
 You can see the full list of resolved benchmarks by running the following the the sbt REPL
 
 ```scala
-cappi::benchmarks
+show cappi::benchmarks
 ```
 
 Alternatively you can override the `benchmarks` setting in your build definition.
 
-```
+```scala
 (cappi.Keys.benchmarks in cappi.Keys.cappi) := Seq("foo.BazBenchmark")
 ```
 
@@ -43,13 +42,13 @@ Alternatively you can override the `benchmarks` setting in your build definition
 
 To run your benchmarks, simply run the following in the sbt REPL
 
-```
+```scala
 cappi::benchmark
 ```
 
 Alternatively you can run just a target benchmark with `benchmarkOnly` providing a fully qualified Benchmark name.
 
-```
+```scala
 cappi::benchmarkOnly com.you.YourBenchmark
 ```
 
