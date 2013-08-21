@@ -7,4 +7,6 @@ object Keys {
   val caliperVersion = SettingKey[String]("caliper-version", "Version of caliper to depend on in test. Default is (0.5-rc1)")
   val benchmark = TaskKey[Unit]("benchmark", "Executes all benchmarks.")
   val benchmarkOnly = InputKey[Unit]("benchmark-only", "Executes specified benchmarks.")
+  val benchmarks = TaskKey[Seq[String]](
+    "benchmarks", "Seq of class names to benchmark. By default all class names are based on items in the Test classpath with names that end with 'Benchmark'")
 }
