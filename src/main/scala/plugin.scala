@@ -10,11 +10,14 @@ import sbt.Defaults._
 object Plugin extends sbt.Plugin {
   import cappi.Keys._
 
-  val benchmarkTasks = Seq(
-    benchmark := benchmarkTaskInitTask.value(
+  def cappiTasks = Seq(
+    caliperVersion in cappi := "0.5-rc1",
+    libraryDependencies +=
+      "com.google.caliper" % "caliper" % (caliperVersion in cappi).value % "test",
+    benchmark in cappi := benchmarkTaskInitTask.value(
       (sources in Test).value map { _.base } filter { _.endsWith("Benchmark") }
     ),
-    benchmarkOnly := benchmarkTaskInitTask.value(
+    benchmarkOnly in cappi := benchmarkTaskInitTask.value(
       Def.spaceDelimited("<arg>").parsed
     )
   )
@@ -32,9 +35,11 @@ object Plugin extends sbt.Plugin {
     val forkOpts = forkOptions.value
     val out = streams.value
     val fr = new ForkRun(forkOpts)
+    out.log.info("cpa %s" format cpa)
     ({ args: Seq[String] =>
       if (args.isEmpty) println("No benchmarks specified - nothing to run")
-      else sbt.toError(fr.run("com.google.caliper.Runner", Build.data(cpa), args, out.log))
+      else sbt.toError(fr.run("com.google.caliper.Runner",
+                              /*Attributed*/Build.data(cpa), args, out.log))
     })
   }
 }
