@@ -10,8 +10,6 @@ scalacOptions ++= Seq(Opts.compile.deprecation, "-feature")
 
 sbtPlugin := true
 
-libraryDependencies += "com.google.caliper" % "caliper" % "0.5-rc1"
-
 licenses := Seq(
   ("MIT", url("https://github.com/softprops/%s/blob/%s/LICENSE"
               .format(name.value, version.value))))
