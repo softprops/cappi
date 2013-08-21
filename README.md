@@ -10,12 +10,14 @@ This project targets sbt version [0.13](http://www.scala-sbt.org/0.13.0/docs/hom
 
 To install Cappi add the following to your project's plugin configuration, typically in a `project/plugins.sbt` file.
 
-    resolvers += Resolver.url(
-      "bintray-sbt-plugin-releases",
-          url("http://dl.bintray.com/content/sbt/sbt-plugin-releases"))(
-            Resolver.ivyStylePatterns)
+```scala
+resolvers += Resolver.url(
+  "bintray-sbt-plugin-releases",
+    url("http://dl.bintray.com/content/sbt/sbt-plugin-releases"))(
+      Resolver.ivyStylePatterns)
 
-    addSbtPlugin("me.lessis" % "cappi" % "0.1.0")
+addSbtPlugin("me.lessis" % "cappi" % "0.1.0")
+```
 
 Then mix `cappiSettings` into your build defintion, typically in a `build.sbt` file.
 
