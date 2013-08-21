@@ -6,11 +6,17 @@ The [sweetest](http://www.urbandictionary.com/define.php?term=cappi) [sbt](http:
 ## usage
 
 ```
-benchmark
+cappi::benchmark
 ```
 
 ```
-benchmarkOnly com.you.MyBenchmark
+cappi::benchmarkOnly com.you.MyBenchmark
+```
+
+To override the calpier version in use (0.5-rc1). Override the `caliperVersion in cappi` task
+
+```scala
+caliperVersion in cappi := Def.task { "custom-version" }
 ```
 
 ## props
