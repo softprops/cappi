@@ -12,11 +12,15 @@ object Plugin extends sbt.Plugin {
 
   def cappiTasks = Seq(
     caliperVersion in cappi := "0.5-rc1",
+    benchmarks in cappi := {
+     val base = (scalaSource in Test).value
+     (sources in Test).value.map {
+        IO.relativize(base, _).get.replace("/",".").replace(".scala", "")
+      }.filter(_.endsWith("Benchmark"))
+    },
     libraryDependencies +=
       "com.google.caliper" % "caliper" % (caliperVersion in cappi).value % "test",
-    benchmark in cappi := benchmarkTaskInitTask.value(
-      (sources in Test).value map { _.base } filter { _.endsWith("Benchmark") }
-    ),
+    benchmark in cappi := benchmarkTaskInitTask.value((benchmarks in cappi).value),
     benchmarkOnly in cappi := benchmarkTaskInitTask.value(
       Def.spaceDelimited("<arg>").parsed
     )
@@ -24,10 +28,18 @@ object Plugin extends sbt.Plugin {
 
    // straight otta compton https://github.com/sbt/sbt/blob/9ea7da6de61aac90f9b52516e829da612817f459/main/src/main/scala/sbt/Defaults.scala#L405-L410
   private[this] def forkOptions: Def.Initialize[Task[ForkOptions]] =
-    (baseDirectory, javaOptions, outputStrategy, envVars, javaHome, connectInput) map {
-      (base, options, strategy, env, javaHomeDir, connectIn) =>
+    (fullClasspath in Test, baseDirectory, javaOptions, outputStrategy, envVars, javaHome, connectInput) map {
+      (tcp, base, options, strategy, env, javaHomeDir, connectIn) =>
         // bootJars is empty by default because only jars on the user's classpath should be on the boot classpath
-        ForkOptions(bootJars = Nil, javaHome = javaHomeDir, connectInput = connectIn, outputStrategy = strategy, runJVMOptions = options, workingDirectory = Some(base), envVars = env)
+        val cp = "-classpath" :: Path.makeString(tcp.files) :: Nil
+        ForkOptions(
+          bootJars = Nil,
+          javaHome = javaHomeDir,
+          connectInput = connectIn,
+          outputStrategy = strategy,
+          runJVMOptions = options ++ cp,
+          workingDirectory = Some(base),
+          envVars = env)
     }
 
   private def benchmarkTaskInitTask: Def.Initialize[Task[Seq[String] => Unit]] = Def.task {
@@ -35,11 +47,10 @@ object Plugin extends sbt.Plugin {
     val forkOpts = forkOptions.value
     val out = streams.value
     val fr = new ForkRun(forkOpts)
-    out.log.info("cpa %s" format cpa)
     ({ args: Seq[String] =>
       if (args.isEmpty) println("No benchmarks specified - nothing to run")
       else sbt.toError(fr.run("com.google.caliper.Runner",
-                              /*Attributed*/Build.data(cpa), args, out.log))
+                              Attributed.data(cpa), args, out.log))
     })
   }
 }
