@@ -79,7 +79,7 @@ If you do not which to have Cappi add this to your test classpath for some reaso
 your test class path. Set the `caliperVersion` setting to `None`
 
 ```scala
-capilperVersion in cappi := None
+cailperVersion in cappi := None
 ```
 
 ## props
