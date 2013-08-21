@@ -6,6 +6,8 @@ version := "0.1.0-SNAPSHOT"
 
 description := "a sweetest benchmarking plugin you will ever meet"
 
+scalacOptions ++= Seq(Opts.compile.deprecation, "-feature")
+
 sbtPlugin := true
 
 libraryDependencies += "com.google.caliper" % "caliper" % "0.5-rc1"
