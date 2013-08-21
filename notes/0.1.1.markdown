@@ -12,7 +12,7 @@ Simply add the following to your sbt plugin definition.
                                 
     addSbtPlugin("me.lessis" % "cappi" % "0.1.1")
 
-Then mix `cappiTasks` into your build defintion
+Then mix `cappiSettings` into your build definition
 
     seq(cappiSettings:_*)
 
@@ -26,4 +26,4 @@ To run a single benchmark, just enter
 
     > cappi::benchmarkOnly com.beep.BoopBenchmark
 
-For more information, see the projects [readme](https://github.com/softprops/cappi#readme)
+For more information, see the project's [readme](https://github.com/softprops/cappi#readme)
