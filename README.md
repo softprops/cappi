@@ -84,7 +84,7 @@ To override the calpier version in use, "0.5-rc1" by default, override the `cali
 caliperVersion in cappi := Some("custom-version")
 ```
 
-If you do not which to have Cappi add this to your test classpath for some reason, say your benchmarks are not actually under
+If you do not wish to have Cappi add this to your test classpath for some reason, say your benchmarks are not actually under
 your test class path. Set the `caliperVersion` setting to `None`
 
 ```scala
