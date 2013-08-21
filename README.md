@@ -16,13 +16,13 @@ resolvers += Resolver.url(
     url("http://dl.bintray.com/content/sbt/sbt-plugin-releases"))(
       Resolver.ivyStylePatterns)
 
-addSbtPlugin("me.lessis" % "cappi" % "0.1.0")
+addSbtPlugin("me.lessis" % "cappi" % "0.1.1")
 ```
 
-Then mix `cappiTasks` into your build defintion, typically in a `build.sbt` file.
+Then mix `cappiSettings` into your build defintion, typically in a `build.sbt` file.
 
 ```scala
-seq(cappiTasks:_*)
+seq(cappiSettings:_*)
 ```
 
 ## Usage
