@@ -1,8 +1,9 @@
 ## initial release
 
-If you've ever wanted to easily run Google [Caliper](https://code.google.com/p/caliper/) microbench mark tests from sbt, Cappi is your man.
+If you've ever wanted to easily run Google [Caliper](https://code.google.com/p/caliper/) microbenchmark tests from sbt, Cappi is your man.
 
-Simply add the following to your sbt plugin defintion.
+### Up
+Simply add the following to your sbt plugin definition.
 
     resolvers += Resolver.url(
     "bintray-sbt-plugin-releases",
@@ -10,13 +11,14 @@ Simply add the following to your sbt plugin defintion.
         Resolver.ivyStylePatterns)
                                 
     addSbtPlugin("me.lessis" % "cappi" % "0.1.0")
-                                    
+
 Then mix `cappiSettings` into your build defintion
-                                    
+
     seq(cappiSettings:_*)
-    
-    
-To run you benchmarks from the sbt REPL just enter
+
+### Running
+
+To run your benchmarks from the sbt REPL, just enter
 
     > cappi::benchmark
     

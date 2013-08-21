@@ -8,7 +8,7 @@ Cappi runs [Caliper](https://code.google.com/p/caliper/) benchmarks
 
 This project targets sbt version [0.13](http://www.scala-sbt.org/0.13.0/docs/home.html). If you should want 0.12 support [drop me an issue](https://github.com/softprops/cappi/issues/new?title=add%20support%20for%20sbt%200.12)
 
-To install Cappi add the following to your project's plugin configuration, typically in a `project/plugins.sbt` file.
+To install Cappi in your sbt project, add the following to your project's plugin configuration, typically in a `project/plugins.sbt` file.
 
 ```scala
 resolvers += Resolver.url(
