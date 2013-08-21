@@ -16,7 +16,7 @@ cappi::benchmarkOnly com.you.MyBenchmark
 To override the calpier version in use (0.5-rc1). Override the `caliperVersion in cappi` task
 
 ```scala
-caliperVersion in cappi := Def.task { "custom-version" }
+caliperVersion in cappi := "custom-version"
 ```
 
 ## props
