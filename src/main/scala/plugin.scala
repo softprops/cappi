@@ -11,15 +11,15 @@ object Plugin extends sbt.Plugin {
   import cappi.Keys._
 
   def cappiTasks = Seq(
-    caliperVersion in cappi := "0.5-rc1",
+    caliperVersion in cappi := Some("0.5-rc1"),
     benchmarks in cappi := {
      val base = (scalaSource in Test).value
      (sources in Test).value.map {
         IO.relativize(base, _).get.replace("/",".").replace(".scala", "")
       }.filter(_.endsWith("Benchmark"))
     },
-    libraryDependencies +=
-      "com.google.caliper" % "caliper" % (caliperVersion in cappi).value % "test",
+    libraryDependencies ++=
+      (caliperVersion in cappi).value.map(cv => Seq("com.google.caliper" % "caliper" % cv % "test")).getOrElse(Nil),
     benchmark in cappi := benchmarkTaskInitTask.value((benchmarks in cappi).value),
     benchmarkOnly in cappi := benchmarkTaskInitTask.value(
       Def.spaceDelimited("<arg>").parsed
