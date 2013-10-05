@@ -4,13 +4,12 @@ import sbt._
 import sbt.Keys._
 import sbt.Defaults._
 
-// my attempt at getting https://github.com/alno/sbt-caliper working
-// see also https://github.com/alno/sbt-caliper/issues/1
-
+/** An sbt interface for the Google caliper microbenchmark tool */
 object Plugin extends sbt.Plugin {
   import cappi.Keys._
 
   def cappiSettings = Seq(
+    caliperOptions in cappi := Nil,
     caliperVersion in cappi := Some("0.5-rc1"),
     benchmarks in cappi := {
      val base = (scalaSource in Test).value
@@ -27,6 +26,7 @@ object Plugin extends sbt.Plugin {
   )
 
    // straight otta compton https://github.com/sbt/sbt/blob/9ea7da6de61aac90f9b52516e829da612817f459/main/src/main/scala/sbt/Defaults.scala#L405-L410
+
   private[this] def forkOptions: Def.Initialize[Task[ForkOptions]] =
     (fullClasspath in Test, baseDirectory, javaOptions, outputStrategy, envVars, javaHome, connectInput) map {
       (tcp, base, options, strategy, env, javaHomeDir, connectIn) =>
@@ -47,10 +47,11 @@ object Plugin extends sbt.Plugin {
     val forkOpts = forkOptions.value
     val out = streams.value
     val fr = new ForkRun(forkOpts)
-    ({ args: Seq[String] =>
-      if (args.isEmpty) println("No benchmarks specified - nothing to run")
-      else sbt.toError(fr.run("com.google.caliper.Runner",
-                              Attributed.data(cpa), args, out.log))
+    val opts = (caliperOptions in cappi).value
+    ({ benchmarks: Seq[String] =>
+      if (benchmarks.isEmpty) println("No benchmarks specified - nothing to run")
+      else benchmarks.map( b => sbt.toError(fr.run("com.google.caliper.Runner",
+                              Attributed.data(cpa), opts :+ b, out.log)))
     })
   }
 }
