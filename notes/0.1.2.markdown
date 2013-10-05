@@ -1,0 +1,18 @@
+# fixes
+
+* defining multiple benchmarks now works as expected
+
+Previously if you defined benchmarks in multiple source files cappi would attempt to run them as a comma-separated list which did not work.
+Instead cappy no opts to run these as sequentially forked tasks.
+
+# enhancements
+
+* Passing Caliper flags to benchmark tests
+
+Caliper allows you to pass along flags to customize test runs but cappi did not expose an interface to do so. You can do so now by defining a `cappiSettings`binding. 
+
+In your build definition you can do this using the [cappi.Opts]() helper.
+
+    cappi.Keys.caliperOptions in cappi.Keys.cappi :=
+      cappi.Opts.params(("foo", "bar"), ("baz" -> "boom"))
+
