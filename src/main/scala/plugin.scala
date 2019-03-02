@@ -14,7 +14,7 @@ object Plugin extends sbt.Plugin {
     benchmarks in cappi := {
      val base = (scalaSource in Test).value
      (sources in Test).value.map {
-        IO.relativize(base, _).get.replace(java.io.File.separator,".").replace(".scala", "")
+        IO.relativize(base, _).getOrElse("").replace(java.io.File.separator,".").replace(".scala", "")
       }.filter(_.endsWith("Benchmark"))
     },
     libraryDependencies ++=
